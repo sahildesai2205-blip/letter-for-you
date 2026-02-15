@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<title>For You 🤍</title>
+
+<style>
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  height:100vh;
+  background:linear-gradient(-45deg,#2e1a47,#3b215a,#4a2b6a,#3e2461);
+  background-size:400% 400%;
+  animation:bgMove 15s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+@keyframes bgMove {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.float {
+  position:absolute;
+  font-size:14px;
+  opacity:0.7;
+  animation:drift 8s infinite ease-in-out;
+}
+
+@keyframes drift {
+  0%{transform:translateY(0) translateX(0);}
+  50%{transform:translateY(-10px) translateX(10px);}
+  100%{transform:translateY(0) translateX(0);}
+}
+
+.openBtn {
+  width:220px;
+  height:130px;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+  border:none;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  font-family:'Quicksand',sans-serif;
+  color:#fff;
+}
+
+.letter {
+  display:none;
+  position:absolute;
+  width:92%;
+  max-width:400px;
+  height:80vh;
+  overflow-y:auto;
+  background:rgba(60,40,80,0.7);
+  backdrop-filter:blur(25px);
+  padding:20px;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,0.2);
+  opacity:0;
+  transform:scale(0.9);
+  transition:all 0.6s ease;
+}
+
+.show {
+  display:block;
+  opacity:1;
+  transform:scale(1);
+}
+
+h3 {
+  margin-top:0;
+  color:#ffffff;
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:700;
+  font-style:italic;
+}
+
+p {
+  line-height:1.8;
+  color:#fff0f6;
+  font-family:'Quicksand', -apple-system, sans-serif;
+  font-weight:600;
+  font-style:italic;
+  font-size:14px;
+}
+
+.fadeText {
+  opacity:0;
+  transform:translateY(15px);
+  transition:all 1s ease;
+}
+
+.fadeText.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+textarea {
+  width:90%;
+  padding:8px;
+  border-radius:10px;
+  border:none;
+  font-family:'Quicksand',sans-serif;
+  font-size:16px;
+}
+
+.sendBtn {
+  padding:3px 12px;
+  font-size:11px;
+  border:none;
+  border-radius:3px;
+  background:#e1bee7;
+  color:#3b215a;
+  font-family:'Quicksand',sans-serif;
+}
+
+.star {
+  font-size:24px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="float" style="top:10%;left:10%;">💖</div>
+<div class="float" style="top:20%;left:80%;">😘</div>
+<div class="float" style="top:70%;left:20%;">💗</div>
+<div class="float" style="top:50%;left:60%;">✨</div>
+<div class="float" style="top:30%;left:30%;">🤍</div>
+
+<button class="openBtn" onclick="openLetter()">
+<div style="font-size:40px;">💌</div>
+<div>Tap to open</div>
+</button>
+
+<div class="letter" id="letter">
+
+<h3>Dear beautiful butterfly,</h3>
+<hr>
+
+<p class="fadeText">It’s funny how all of this even started.</p>
+<p class="fadeText">We met in college while submitting assignments and I was trying to help you upload a PDF that simply refused to upload.</p>
+<p class="fadeText">And somehow that turned into us exchanging numbers that day.</p>
+<p class="fadeText">After that we just kept meeting again and again.</p>
+<p class="fadeText">From going to Suraj Lama and sharing chicken pahadi momos</p>
+<p class="fadeText">to that first time we went all the way to Bandra together just to walk around and shop.</p>
+<p class="fadeText">What started off as helping you with an assignment</p>
+<p class="fadeText">somewhere between the conversations the walks and all the random moments we shared</p>
+<p class="fadeText">quietly turned into you becoming my favourite part of the day.</p>
+<p class="fadeText">I’ve always believed that giving a girl flowers isn’t important but treating her like one is.</p>
+<p class="fadeText">I hope I’m able to live up to that.</p>
+<p class="fadeText">And now after everything that has quietly brought us here</p>
+<p class="fadeText">I’m really glad that this is how we’re spending today.</p>
+
+<p class="fadeText">
+Yours<br>
+the guy who helped you upload that PDF :)
+</p>
+
+<hr>
+
+<p class="fadeText" style="text-align:center;">
+Before we go… make a wish ✨
+</p>
+
+<div style="text-align:center;">
+<span class="star" onclick="makeWish()">⭐</span>
+</div>
+
+<p id="wish" style="text-align:center;"></p>
+
+<hr>
+
+<p class="fadeText" style="text-align:center;">
+Thank you for today 😘🫂
+</p>
+
+<hr>
+
+<p class="fadeText" style="text-align:center;">
+Leave something here if you want 🤍
+</p>
+
+<div style="text-align:center;">
+<textarea id="note" placeholder="write anything..."></textarea>
+<br><br>
+<button class="sendBtn" onclick="sendNote()">Send</button>
+</div>
+
+</div>
+
+<script>
+
+function openLetter(){
+document.querySelector(".openBtn").style.display="none";
+document.getElementById("letter").classList.add("show");
+}
+
+function makeWish(){
+document.getElementById("wish").innerHTML =
+"I hope this becomes one of those days we look back on and smile 🙂";
+}
+
+function sendNote(){
+let text=document.getElementById("note").value;
+if(text){
+let url="https://wa.me/919820409913?text="+encodeURIComponent(text);
+window.open(url,"_blank");
+}
+}
+
+const faders=document.querySelectorAll('.fadeText');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+},{threshold:0.3});
+
+faders.forEach(fader=>{
+observer.observe(fader);
+});
+
+</script>
+
+</body>
+</html>
